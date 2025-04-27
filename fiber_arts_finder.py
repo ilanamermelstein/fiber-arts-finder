@@ -365,6 +365,7 @@ class Interact:
         print("Welcome to the Fiber Arts Finder!")
         self.graph = Graph(shopsCache=shopsCache, yarnsCache=yarnsCache, patternsCache=patternsCache)
         self.beginInteraction()
+        print("Thanks for using the Fiber Arts Finder! Goodbye!")
 
     def beginInteraction(self):
         """Essentially the homepage of the program. Gives users options for interactions and allows them to exit the program."""
@@ -383,7 +384,7 @@ class Interact:
             elif int(userIn) and int(userIn) == 6:
                 self.optionSix()
             elif int(userIn) and int(userIn) == 7:
-                print("Thanks for using the Fiber Arts Finder! Goodbye!")
+                return
             else:
                 print("Please enter a valid response.")
                 self.beginInteraction()
@@ -674,7 +675,7 @@ class Interact:
 
 def main():
     fiber_arts_finder = Interact() #add cached data as attributes here if you have already made the API calls to retrieve data from Ravelry
-    fiber_arts_finder.cacheAllData(shopsfile="", yarnsfile="", patternsfile="") #Enter file names to cache data after running for the first time. It takes a longggg time for all the API calls (1-2 hours I think), so definitely cache the data if you want to run it again
+    fiber_arts_finder.cacheAllData(shopsfile="", yarnsfile="", patternsfile="") #Enter file names to cache data after running for the first time. It takes a longggg time for all the API calls (1-2 hours I think), so definitely cache the data if you want to run it againc
 
 if __name__ == '__main__':
     main()
