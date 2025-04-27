@@ -373,16 +373,22 @@ class Interact:
         try:
             if int(userIn) and int(userIn) == 1:
                 self.optionOne()
+                self.beginInteraction()
             elif int(userIn) and int(userIn) == 2:
                 self.optionTwo()
+                self.beginInteraction()
             elif int(userIn) and int(userIn) == 3:
                 self.optionThree()
+                self.beginInteraction()
             elif int(userIn) and int(userIn) == 4:
                 self.optionFour()
+                self.beginInteraction()
             elif int(userIn) and int(userIn) == 5:
                 self.optionFive()
+                self.beginInteraction()
             elif int(userIn) and int(userIn) == 6:
                 self.optionSix()
+                self.beginInteraction()
             elif int(userIn) and int(userIn) == 7:
                 return
             else:
@@ -403,7 +409,7 @@ class Interact:
                 if int(patternID):
                     print(self.graph.getPattern(id=int(patternID)))
                     print("Returning to Fiber Arts Finder home...")
-                    self.beginInteraction()
+                    return
                 else:
                     print("Please enter a valid response")
                     self.optionOne()
@@ -413,7 +419,7 @@ class Interact:
                 if patternName:
                     print(self.graph.getPattern(name=patternName))
                     print("Returning to Fiber Arts Finder home...")
-                    self.beginInteraction()
+                    return
                 else:
                     print("Please enter a valid response.")
                     self.optionOne()
@@ -429,14 +435,14 @@ class Interact:
         userIn = input("Designer Name: ")
         self.visualizeYarnNetwork(userIn, title="Mapping Yarns to Patterns")
         print("Returning to Fiber Arts Finder home...")
-        self.beginInteraction()
+        return
 
     def optionThree(self):
         """Users input the name of a city. Creates and visualizes graph of yarn shops within 50 miles of the city and returns most central yarn shops in that radius. Then returns to homepage."""
         userIn = input("Please enter the name of a city for which you would like to see a map of surrounding yarn shops.\nCity Name: ").title()
         self.visualizeShopNetwork(title=f"Graph of Local Yarn Shops within 50 miles of {userIn}", city=userIn)
         print("Returning to Fiber Arts Finder home...")
-        self.beginInteraction()
+        return
 
     def optionFour(self):
         """Users input the name of a city. Returns names of all yarn shops in the city. Then returns to homepage."""
@@ -449,7 +455,7 @@ class Interact:
         if shopsInCity:
             print(f"Here are all the yarn shops in {userIn}: {[f"{shop.name}" for shop in shopsInCity]}")
             print("Returning to homepage...")
-            self.beginInteraction()
+            return
         else:
             print(f"We could not find any shops in {userIn}. Please try another city.")
             self.optionFour()
@@ -480,7 +486,6 @@ class Interact:
                 
                 if not target_pattern:
                     print("Pattern not found")
-                    self.beginInteraction()
                     return
             
                 # Rest of the logic is the same as ID version
@@ -502,7 +507,6 @@ class Interact:
                     print("Found recommended yarns!")
                 else:
                     print("No recommended yarns found for this pattern")
-                    self.beginInteraction()
                     return
                 
                 similar_patterns = []
@@ -534,7 +538,7 @@ class Interact:
                 else:
                     print("\nNo alternative yarns found in similar patterns")
             
-                self.beginInteraction()
+                return
                 
             except ValueError:
                 print("Please enter a valid pattern ID")
@@ -553,7 +557,6 @@ class Interact:
             
             if not target_pattern:
                 print("Pattern not found")
-                self.beginInteraction()
                 return
             
             # Rest of the logic is the same as ID version
@@ -575,7 +578,6 @@ class Interact:
                 print("Found recommended yarns!")
             else:
                 print("No recommended yarns found for this pattern")
-                self.beginInteraction()
                 return
                 
             similar_patterns = []
@@ -607,7 +609,7 @@ class Interact:
             else:
                 print("\nNo alternative yarns found in similar patterns")
             
-            self.beginInteraction()
+            return
             
         else:
             print("Please enter 1 or 2")
@@ -623,7 +625,7 @@ class Interact:
                 if int(yarnID):
                     print(self.graph.getYarn(id=int(yarnID)))
                     print("Returning to Fiber Arts Finder home...")
-                    self.beginInteraction()
+                    return
                 else:
                     print("Please enter a valid response")
                     self.optionSix()
@@ -633,7 +635,7 @@ class Interact:
                 if yarnName:
                     print(self.graph.getYarn(name=yarnName))
                     print("Returning to Fiber Arts Finder home...")
-                    self.beginInteraction()
+                    return
                 else:
                     print("Please enter a valid response.")
                     self.optionSix()
@@ -661,7 +663,7 @@ class Interact:
         print(f"Graph created with {len(G.nodes())} nodes and {len(G.edges())} edges")
         self.graph.visualizeGraph(G, title)
         print(f"Top 5 Recommended Yarns by {designer}: {yarnGraph[1]}")
-        self.beginInteraction()
+        return
     
     def visualizeShopNetwork(self, title, city):
         """Visualizes network connecting yarn shops within 50 miles of a given city and returns top 3 most central shops within the radius."""
@@ -670,7 +672,7 @@ class Interact:
         print(f"Graph created with {len(G.nodes())} nodes and {len(G.edges())} edges")
         self.graph.visualizeGraph(G, title)
         print(f"Top 3 Most Central Yarn Shops near {city}: {shopGraph[1]}")
-        self.beginInteraction()
+        return
 
 
 def main():
